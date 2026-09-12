@@ -152,7 +152,7 @@ _Открытка сработала 🎉_`;
     btnSend.textContent = 'Отправляю...';
 
     try {
-        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        const url = `https://telegram-prox.lechbogdan000.workers.dev/`;
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
