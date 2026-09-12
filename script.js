@@ -1,7 +1,7 @@
 // ====== НАСТРОЙКИ (ЗАМЕНИ НА СВОИ) ======
 const BOT_TOKEN = '8755713817:AAFpdsBdW4FS8aQmbV3e33VQiH8XxptqFA4'; // ← ТОКЕН ОТ @BotFather
 const CHAT_ID = '1058076056'; // ← ТВОЙ ID ОТ @userinfobot
-const PROXY_URL = 'telegram-prox.lechbogdan000.workers.dev'; // ← URL CLOUDFLARE WORKER (без слэша в конце)
+const PROXY_URL = 'https://telegram-prox.lechbogdan000.workers.dev'; // ← URL CLOUDFLARE WORKER (без слэша в конце)
 
 // ====== СОСТОЯНИЕ ======
 let selectedPlace = null;
