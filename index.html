@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>У меня к тебе вопрос 📨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ФОНОВЫЕ СЕРДЕЧКИ -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- ЭКРАН 1: Приглашение -->
+    <section class="screen active" id="screen1">
+        <div class="card">
+            <div class="emoji-big">📨</div>
+            <h1 class="title">У меня к тебе один вопрос...</h1>
+            <p class="subtitle">Пойдёшь со мной гулять?</p>
+
+            <div class="buttons">
+                <button class="btn btn-yes" id="btnYes">Да 🙃</button>
+                <div class="no-btn-wrap">
+                <button class="btn btn-no" id="btnNo">Нет</button>
+            </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 2: Выбор места -->
+    <section class="screen" id="screen2">
+        <div class="card">
+            <div class="emoji-big">✨</div>
+            <h2 class="title">Урааа! 🥳</h2>
+            <p class="subtitle">А куда хочешь?</p>
+            <p class="subtitle">Обманул, еще вопрос)</p>
+
+            <div class="options" id="placesOptions">
+                <div class="option" data-value="🍽 Ресторан">
+                    <span class="option-icon">🍽</span>
+                    <span class="option-text">Ресторан (узнать бы, какую кухню ты любишь)</span>
+                </div>
+                <div class="option" data-value="🎬 Кино">
+                    <span class="option-icon">🎬</span>
+                    <span class="option-text">Кино (я помню, что не любишь, так просто добавил)</span>
+                </div>
+                <div class="option" data-value="🌳 Прогулка в парке">
+                    <span class="option-icon">🌳</span>
+                    <span class="option-text">Прогулка (пробовали как то, почему бы и нет)</span>
+                </div>
+                <div class="option" data-value="🚗 Разбиться на машине">
+                    <span class="option-icon">🚗</span>
+                    <span class="option-text">Разбиться на машине (ну вдруг день плохой)</span>
+                </div>
+                <div class="option" data-value="☕ Кофейня">
+                    <span class="option-icon">☕</span>
+                    <span class="option-text">Кофейня (что то новое)</span>
+                </div>
+                <div class="option" data-value="🎨 Что-то другое">
+                    <span class="option-icon">🎨</span>
+                    <span class="option-text">Другое (фантазия кончилась)</span>
+                </div>
+            </div>
+
+            <button class="btn btn-next" id="btnNextPlace" disabled>Дальше →</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 2.5: Только для ресторана — выбор кухни -->
+    <section class="screen" id="screenCuisine">
+        <div class="card">
+            <div class="emoji-big">🍽</div>
+            <h2 class="title">Ооо, ресторан!</h2>
+            <p class="subtitle">А какую кухню ты любишь?</p>
+
+            <div class="pills" id="cuisinePills">
+                <div class="pill" data-value="Итальянская">Итальянская</div>
+                <div class="pill" data-value="Японская">Японская</div>
+                <div class="pill" data-value="Грузинская">Грузинская</div>
+                <div class="pill" data-value="Русская">Русская</div>
+                <div class="pill" data-value="Европейская">Европейская</div>
+                <div class="pill" data-value="Азиатская">Азиатская</div>
+                <div class="pill" data-value="Мексиканская">Мексиканская</div>
+                <div class="pill" data-value="Любая 😋">Любая 😋</div>
+            </div>
+
+            <button class="btn btn-next" id="btnNextCuisine" disabled>Дальше →</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 3: Дата и время -->
+    <section class="screen" id="screen3">
+        <div class="card">
+            <div class="emoji-big">📅</div>
+            <h2 class="title">Когда тебе удобно?</h2>
+            <p class="subtitle">Выбери дату и время</p>
+            <p class="subtitle">Да-да-да, снова еще один вопрос, обещаю последний</p>
+
+            <div class="datetime-block">
+                <label class="input-label">Дата</label>
+                <input type="date" id="inputDate" class="input-field">
+
+                <label class="input-label">Время</label>
+                <input type="time" id="inputTime" class="input-field">
+            </div>
+
+            <button class="btn btn-next" id="btnSend" disabled>Отправить</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 4: Финал -->
+    <section class="screen" id="screen4">
+        <div class="card">
+            <div class="emoji-big">🎉</div>
+            <h2 class="title">Всё готово!</h2>
+            <p class="subtitle">Твой ответ улетел ко мне. Увидимся</p>
+            <div class="final-hearts">😁</div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
