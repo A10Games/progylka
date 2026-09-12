@@ -1,6 +1,7 @@
 // ====== НАСТРОЙКИ (ЗАМЕНИ НА СВОИ) ======
-const BOT_TOKEN = '8755713817:AAFpdsBdW4FS8aQmbV3e33VQiH8XxptqFA4'; // ← СЮДА ТОКЕН
-const CHAT_ID = '1058076056'; // ← СЮДА ТВОЙ ID
+const BOT_TOKEN = '8755713817:AAFpdsBdW4FS8aQmbV3e33VQiH8XxptqFA4'; // ← ТОКЕН ОТ @BotFather
+const CHAT_ID = '1058076056'; // ← ТВОЙ ID ОТ @userinfobot
+const PROXY_URL = 'telegram-prox.lechbogdan000.workers.dev'; // ← URL CLOUDFLARE WORKER (без слэша в конце)
 
 // ====== СОСТОЯНИЕ ======
 let selectedPlace = null;
@@ -41,17 +42,19 @@ const btnNo = document.getElementById('btnNo');
 const btnYes = document.getElementById('btnYes');
 
 function moveNoButton() {
-    const card = btnNo.closest('.card');
-    const cardRect = card.getBoundingClientRect();
-    const btnRect = btnNo.getBoundingClientRect();
+    const wrap = btnNo.parentElement; // .no-btn-wrap
+    const wrapRect = wrap.getBoundingClientRect();
 
-    // Сколько места есть внутри карточки (с отступом 8px от краёв)
-    const padding = 8;
-    const maxX = Math.max(cardRect.width - btnRect.width - padding * 2, 60);
-    const maxY = 140;
+    const maxX = wrapRect.width - btnNo.offsetWidth;
+    const maxY = wrapRect.height - btnNo.offsetHeight;
 
-    // Случайное смещение в пределах доступного места (центрированное)
-    const randomX = (Math.random() - 0.5) * maxX;
+    if (maxX <= 0 || maxY <= 0) {
+        if (noBtnAttempts < noBtnTexts.length - 1) noBtnAttempts++;
+        btnNo.textContent = noBtnTexts[noBtnAttempts];
+        return;
+    }
+
+    const randomX = Math.random() * maxX;
     const randomY = (Math.random() - 0.5) * maxY;
 
     btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
@@ -123,7 +126,7 @@ function checkDateTime() {
 inputDate.addEventListener('change', checkDateTime);
 inputTime.addEventListener('change', checkDateTime);
 
-// ====== ОТПРАВКА В TELEGRAM ======
+// ====== ОТПРАВКА В TELEGRAM (ЧЕРЕЗ CLOUDFLARE WORKER) ======
 btnSend.addEventListener('click', async () => {
     const date = inputDate.value;
     const time = inputTime.value;
@@ -152,7 +155,8 @@ _Открытка сработала 🎉_`;
     btnSend.textContent = 'Отправляю...';
 
     try {
-        const url = `https://telegram-prox.lechbogdan000.workers.dev/`;
+        // Отправляем через прокси (Cloudflare Worker), а не напрямую в Telegram
+        const url = `${PROXY_URL}/bot${BOT_TOKEN}/sendMessage`;
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -169,7 +173,7 @@ _Открытка сработала 🎉_`;
             showScreen('screen4');
         } else {
             console.error('Telegram error:', data);
-            alert('Ошибка отправки. Проверь токен и chat_id.');
+            alert('Ошибка отправки. Проверь токен, chat_id и прокси.');
             btnSend.disabled = false;
             btnSend.textContent = 'Отправить';
         }
